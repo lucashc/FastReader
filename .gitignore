@@ -1,6 +1,7 @@
 node_modules
 build
 .vscode
+extension.xpi
 extension/icons
 extension/*
 !extension/launcher.js

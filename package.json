@@ -16,6 +16,7 @@
     "extension": "bash make_extension.sh compose",
     "clean-extension": "bash make_extension.sh clean",
     "all": "yarn build && yarn extension && yarn package",
-    "package": "bash make_extension.sh package"
+    "package": "bash make_extension.sh package",
+    "clean": "rm -r ./build"
   }
 }

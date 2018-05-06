@@ -12,11 +12,14 @@ case $1 in
         convert -resize 96x96 logo.svg logo96.png
         ;;
     clean)
+        rm extension.xpi
         cd ./extension
         echo "Cleaning extension"
         find . -type f -not -name "manifest.json" -not -name "launcher.js" -print0 | xargs -0 rm --
         rmdir static/*
+        rmdir static
         rm icons/*
+        rmdir icons
         ;;
     package)
     cd ./extension
