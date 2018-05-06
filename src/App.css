@@ -1,0 +1,66 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+.App-input {
+  border: 2px grey solid;
+  border-radius: 4px;
+  transition: all 0.1s;
+}
+
+.App-input:focus {
+  border-color: blue;
+}
+
+label {
+  padding-right: 1em;
+  vertical-align: middle;
+  text-align: left;
+}
+form {
+  display: table;
+  margin: 0 auto;
+  margin-top: 1em;
+
+}
+input, textarea, label {
+  display: table-cell;
+  margin-bottom: 0.8em;
+}
+row {
+  display: table-row;
+}
+
+textarea{
+  border: 2px grey solid;
+  border-radius: 4px;
+  transition: all 0.1s;
+  padding: 0.3em;
+}
+textarea:focus {
+  border-color: blue;
+}
+
+.viewer{
+  font-family: sans-serif;
+  font-weight: 400;
+}
