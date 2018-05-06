@@ -7,7 +7,7 @@ class WordViewer extends Component {
   constructor(){
     super();
     this.state = {
-      word: "Begin",
+      word: "Start",
       toggle: false,
       button: "Start"
     }
@@ -26,7 +26,7 @@ class WordViewer extends Component {
       clearInterval(this.state.interval);
       this.setState({
         toggle: false,
-        word: "Gestopt",
+        word: "Stopped",
         button: "Start"
       })
       return;
@@ -44,7 +44,8 @@ class WordViewer extends Component {
       if (current === words.length){
         clearInterval(context.state.interval);
         context.setState({
-          word: "Klaar"
+          word: "Done",
+          button: "Start"
         })
         return;
       }
@@ -104,11 +105,11 @@ class App extends Component {
         <form>
           <row>
             <label>Speed in wpm: </label>
-            <input type="number" className="App-input" onChange={this.handleUpdate} value={this.state.speed} name="speed"/>
+            <input type="number" className="App-input" onChange={this.handleUpdate} value={this.state.speed} name="speed" min="1"/>
           </row>
           <row>
             <label>Pulses per separator: </label>
-            <input type="number" className="App-input" name="dotinterval" onChange={this.handleUpdate} value={this.state.dotinterval}/>
+            <input type="number" className="App-input" name="dotinterval" onChange={this.handleUpdate} value={this.state.dotinterval} min="1"/>
           </row>
           <row>
             <label>Text to read: </label>
