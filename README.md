@@ -1,5 +1,5 @@
 # FastReader
-FastReader is a tool that enables humans to achieve great reading speeds. It works by showing words of sentences with great frequency at the sam spot. This allows the user to read without the need to move the eyes. A typical person reads from paper or screen at 250 to 300 words per minute (WPM). Here are some reading speeds outlined with their level of comprehensibility for the user:
+FastReader is a tool that enables humans to achieve great reading speeds. It works by showing words of sentences with great frequency at the same spot. This allows the user to read without the need to move the eyes. A typical person reads from paper or screen at 250 to 300 words per minute (WPM). Here are some reading speeds outlined with their level of comprehensibility for the user:
 
 | WPM | Level of comprehensibility      |
 | --- | --------------------------      |
