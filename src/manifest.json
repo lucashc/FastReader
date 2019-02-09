@@ -13,6 +13,9 @@
     "default_title": "FastReader",
     "default_popup": "choose_speed.html"
   },
+  "background": {
+    "scripts": ["background.js"]
+  },
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
@@ -20,6 +23,6 @@
     }
   ],
   "permissions": [
-    "activeTab"
+    "activeTab", "storage"
   ]
 }

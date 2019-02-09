@@ -106,6 +106,7 @@ browser.runtime.onMessage.addListener((message) => {
     show_text(selected_text).then(() => {
       console.log("Done showing")
       remove_element()
+      browser.runtime.sendMessage("stop");
     })
   })
 })
