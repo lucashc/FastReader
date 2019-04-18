@@ -7,6 +7,7 @@ function send_message(message) {
 function stop_go_state(stop, submit) {
   document.getElementById("stop").disabled = stop
   document.getElementById("submit").value = submit
+  change_submit(submit)
 }
 
 function message_state(message, stop, submit, state) {
@@ -38,22 +39,33 @@ document.getElementById("stop").addEventListener("click", stop_fastreader)
 
 window.onload = () => {
   console.log("Retrieving state")
+  browser.storage.local.get({submit: 'Start'}).then((result) => {
+    // document.getElementById("note").innerText = result['submit'];
+    document.getElementById("submit").value = result['submit'];
+  })
+
   // Retrieve state
   browser.storage.local.get({state: false}).then((result) => {
     if (result['state']) {
       console.log("Enabling stop")
       document.getElementById("stop").disabled = false;
-      document.getElementById("submit").disabled = true;
     }else {
       console.log("Disabling stop")
       document.getElementById("stop").disabled = true;
-      document.getElementById("submit").disabled = false;
     }
   })
 }
 
+function set_storage(name, value) {
+  browser.storage.local.set({name: value});
+}
+
 function change_state(new_state) {
   browser.storage.local.set({state: new_state});
+}
+
+function change_submit(new_submit) {
+  browser.storage.local.set({submit: new_submit});
 }
 
 browser.runtime.onMessage.addListener((message) => {
