@@ -1,26 +1,39 @@
-function start_fastreader() {
-  console.log("Starting fastreader")
+function send_message(message) {
   browser.tabs.query({currentWindow: true, active: true}).then((tabs) => {
-    browser.tabs.sendMessage(tabs[0].id, document.getElementById("speed").value)
+    browser.tabs.sendMessage(tabs[0].id, message)
   })
-  document.getElementById("stop").disabled = false;
-  document.getElementById("submit").disabled = true;
+}
+
+function stop_go_state(stop, submit) {
+  document.getElementById("stop").disabled = stop
+  document.getElementById("submit").value = submit
+}
+
+function message_state(message, stop, submit, state) {
+  send_message(message)
+  stop_go_state(stop, submit)
+
   // Running
-  change_state(true);
+  change_state(state)
+}
+
+function start_pause_fastreader() {
+  console.log("Starting fastreader")
+  const value = document.getElementById("submit").value
+  const pause = value == 'Pause'
+  const message = value == 'Start'
+        ? document.getElementById("speed").value : value
+
+  message_state(message, false, pause ? 'Play' : 'Pause',
+                 !pause)
 }
 
 function stop_fastreader() {
   console.log("Stopping fastreader")
-  browser.tabs.query({currentWindow: true, active: true}).then((tabs) => {
-    browser.tabs.sendMessage(tabs[0].id, "stop")
-  })
-  document.getElementById("stop").disabled = true;
-  document.getElementById("submit").disabled = false;
-  // Not running
-  change_state(false);
+  message_state("stop", true, 'Start', false)
 }
 
-document.getElementById("submit").addEventListener("click", start_fastreader)
+document.getElementById("submit").addEventListener("click", start_pause_fastreader)
 document.getElementById("stop").addEventListener("click", stop_fastreader)
 
 window.onload = () => {
