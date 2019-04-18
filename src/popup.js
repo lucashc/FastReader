@@ -21,12 +21,11 @@ function message_state(message, stop, submit, state) {
 function start_pause_fastreader() {
   console.log("Starting fastreader")
   const value = document.getElementById("submit").value
-  const pause = value == 'Pause'
   const message = value == 'Start'
         ? document.getElementById("speed").value : value
 
-  message_state(message, false, pause ? 'Play' : 'Pause',
-                 !pause)
+  message_state(message, false, value == 'Pause' ? 'Play' : 'Pause',
+                true)
 }
 
 function stop_fastreader() {
