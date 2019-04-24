@@ -69,8 +69,7 @@ function change_submit(new_submit) {
 
 browser.runtime.onMessage.addListener((message) => {
   if (message == "stop") {
-    document.getElementById("stop").disabled = true;
-    document.getElementById("submit").disabled = false;
+    stop_go_state(true, 'Start');
     change_state(false);
   }
 })
