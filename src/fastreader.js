@@ -1,6 +1,9 @@
 
 var element = `
-<div id="fastbox"><h1></h1></div>
+<div id="fastbox">
+  <input hidden id='fastbox_current' value='0' />
+  <h1></h1>
+</div>
 `
 
 var speed = 400
@@ -22,7 +25,6 @@ function inject_element() {
   })
   $('#fastbox h1').css({
     "margin": "auto",
-    "font-size": "2em",
     "font-family": "sans-serif",
   })
   $("#fastbox h1").text("Loading...")
@@ -42,11 +44,10 @@ function remove_element() {
   })
 }
 
-function show_text(text) {
+function show_text(text, current = 0) {
   console.log("Do show!")
   let time = 60*1000/Number(speed)
   let words = text.split(/[\s\n]/g)
-  let current = 0
   let skip = false
   let steps = 0
   let dotinterval = 2
@@ -82,6 +83,7 @@ function show_text(text) {
         }
       }
       $('#fastbox h1').text(words[current])
+      $('#fastbox_current')[0].value = current
       current += 1
     }, time)
   })
@@ -97,16 +99,32 @@ browser.runtime.onMessage.addListener((message) => {
     remove_element()
     return;
   }
-  speed = message
+
+  if (message == "Pause") {
+    clearInterval(interval)
+    return;
+  }
+
   let selected_text = window.getSelection().toString()
+
+  if (message == "Play") {
+    start_text(selected_text, $('#fastbox_current')[0].value / 1)
+    return
+  }
+
+  speed = message
   console.log(selected_text)
   inject_element().then(() => {
     console.log("Element injected")
     console.log("Start word viewer")
-    show_text(selected_text).then(() => {
-      console.log("Done showing")
-      remove_element()
-      browser.runtime.sendMessage("stop");
-    })
+    start_text(selected_text)
   })
 })
+
+function start_text(selected_text, current = 0) {
+  show_text(selected_text, current).then(() => {
+    console.log("Done showing")
+    remove_element()
+    browser.runtime.sendMessage("stop");
+  })
+}
